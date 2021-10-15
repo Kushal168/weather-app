@@ -2980,10 +2980,10 @@ export default function Weather() {
             <div className="my-5" style={{marginLeft: "25px"}}>
                 <div className="d-flex">
                     <div className="cards">
-                        <DayCard winddir={current_data.wind_dir} maxwind={forcast_data[0].day.maxwind_kph} icon={current_data.condition.icon} ctemp={current_data.temp_c} weather={current_data.condition.text} maxtemp={forcast_data[0].day.maxtemp_c}/>
+                        <DayCard winddir={current_data.is_day == 1 ? current_data.wind_dir : forcast_data[0].hour[16].wind_dir} maxwind={forcast_data[0].day.maxwind_kph} icon={current_data.is_day == 1 ? current_data.condition.icon : forcast_data[0].hour[16].condition.icon} ctemp={current_data.is_day == 1 ? current_data.temp_c : forcast_data[0].hour[16].temp_c} weather={current_data.is_day == 1 ? current_data.condition.text : forcast_data[0].hour[16].condition.text} maxtemp={forcast_data[0].day.maxtemp_c}/>
                     </div>
                     <div className="cards">
-                        <NightCard />
+                        <NightCard winddir={current_data.is_day != 1 ? current_data.wind_dir : forcast_data[0].hour[3].wind_dir} maxwind={forcast_data[0].day.maxwind_kph} icon={current_data.is_day != 1 ? current_data.condition.icon : forcast_data[0].hour[3].condition.icon} ctemp={current_data.is_day != 1 ? current_data.temp_c : forcast_data[0].hour[3].temp_c} weather={current_data.is_day != 1 ? current_data.condition.text : forcast_data[0].hour[3].condition.text} mintemp={forcast_data[0].day.mintemp_c}/>
                     </div>
                     <div className="cards">
                         <TodayCard />
