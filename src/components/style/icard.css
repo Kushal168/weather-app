@@ -1,0 +1,12 @@
+.icard{
+    background-color: aqua;
+    width: 365px;
+    height: 650px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.cards{
+    margin-left: 20px;
+    margin-right: 20px;
+}
