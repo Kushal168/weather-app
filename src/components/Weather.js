@@ -20,7 +20,7 @@ export default function Weather() {
         "wind_mph": 11.9,
         "wind_kph": 19.1,
         "wind_degree": 250,
-        "wind_dir": "WSW",
+        "wind_dir": "E",
         "pressure_mb": 1023,
         "pressure_in": 30.21,
         "precip_mm": 0,
@@ -2977,16 +2977,39 @@ export default function Weather() {
                     </div>
                 )}
             </div>
-            <div className="my-5" style={{marginLeft: "25px"}}>
+            <div className="my-5" style={{ marginLeft: "25px" }}>
                 <div className="d-flex">
                     <div className="cards">
-                        <DayCard winddir={current_data.is_day == 1 ? current_data.wind_dir : forcast_data[0].hour[16].wind_dir} maxwind={forcast_data[0].day.maxwind_kph} icon={current_data.is_day == 1 ? current_data.condition.icon : forcast_data[0].hour[16].condition.icon} ctemp={current_data.is_day == 1 ? current_data.temp_c : forcast_data[0].hour[16].temp_c} weather={current_data.is_day == 1 ? current_data.condition.text : forcast_data[0].hour[16].condition.text} maxtemp={forcast_data[0].day.maxtemp_c}/>
+                        <DayCard
+                            uv={current_data.is_day === 1 ? current_data.uv : forcast_data[0].hour[16].uv}
+                            precip={current_data.is_day === 1 ? current_data.precip_mm : forcast_data[0].hour[16].precip_mm}
+                            humidity={current_data.is_day === 1 ? current_data.humidity : forcast_data[0].hour[16].humidity}
+                            winddir={current_data.is_day === 1 ? current_data.wind_dir : forcast_data[0].hour[16].wind_dir}
+                            maxwind={forcast_data[0].day.maxwind_kph}
+                            icon={current_data.is_day === 1 ? current_data.condition.icon : forcast_data[0].hour[16].condition.icon}
+                            ctemp={current_data.is_day === 1 ? current_data.temp_c : forcast_data[0].hour[16].temp_c}
+                            weather={current_data.is_day === 1 ? current_data.condition.text : forcast_data[0].hour[16].condition.text}
+                            maxtemp={forcast_data[0].day.maxtemp_c} />
                     </div>
                     <div className="cards">
-                        <NightCard winddir={current_data.is_day != 1 ? current_data.wind_dir : forcast_data[0].hour[3].wind_dir} maxwind={forcast_data[0].day.maxwind_kph} icon={current_data.is_day != 1 ? current_data.condition.icon : forcast_data[0].hour[3].condition.icon} ctemp={current_data.is_day != 1 ? current_data.temp_c : forcast_data[0].hour[3].temp_c} weather={current_data.is_day != 1 ? current_data.condition.text : forcast_data[0].hour[3].condition.text} mintemp={forcast_data[0].day.mintemp_c}/>
+                        <NightCard
+                            uv={current_data.is_day !== 1 ? current_data.uv : forcast_data[0].hour[3].uv}
+                            precip={current_data.is_day !== 1 ? current_data.precip_mm : forcast_data[0].hour[3].precip_mm}
+                            humidity={current_data.is_day !== 1 ? current_data.humidity : forcast_data[0].hour[3].humidity}
+                            winddir={current_data.is_day !== 1 ? current_data.wind_dir : forcast_data[0].hour[3].wind_dir}
+                            maxwind={forcast_data[0].day.maxwind_kph}
+                            icon={current_data.is_day !== 1 ? current_data.condition.icon : forcast_data[0].hour[3].condition.icon}
+                            ctemp={current_data.is_day !== 1 ? current_data.temp_c : forcast_data[0].hour[3].temp_c}
+                            weather={current_data.is_day !== 1 ? current_data.condition.text : forcast_data[0].hour[3].condition.text}
+                            mintemp={forcast_data[0].day.mintemp_c} />
                     </div>
                     <div className="cards">
-                        <TodayCard />
+                        <TodayCard
+                            illu={forcast_data[0].astro.moon_illumination}
+                            srise={forcast_data[0].astro.sunrise}
+                            sset={forcast_data[0].astro.sunset}
+                            mrise={forcast_data[0].astro.moonrise}
+                            mset={forcast_data[0].astro.moonset} />
                     </div>
                     <div className="cards">
                         <AverageCard />
