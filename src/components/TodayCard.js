@@ -6,7 +6,7 @@ export default function TodayCard(props) {
         <div>
             <div className="icard">
                 <div>
-                    <div style={{ fontSize: "30px", fontWeight: "500"}}>Sun</div>
+                    <div className="ititle" style={{marginLeft: '10px'}}>Sun</div>
                     <div className="sundial" style={{marginTop: '70px', marginBottom: '50px'}}>
                         <div style={{ textAlign: "center" }}>
                             <img src={sundial} alt="Sundial" height="140px"/>
@@ -14,7 +14,7 @@ export default function TodayCard(props) {
                         </div>
                         <span style={{ fontSize: "23px", fontWeight: '450' , marginLeft: '15px'}}>{props.srise}<span style={{ visibility: "hidden" }}>...........................</span>{props.sset}</span>
                     </div>
-                    <div style={{ fontSize: "30px", fontWeight: "500" ,marginBottom: '40px'}}>
+                    <div className="ititle" style={{marginBottom: '40px', marginLeft: '10px'}}>
                         Moon
                     </div>
                     <div style={{ textAlign: "center", fontSize: "25px", fontWeight: "400" }}>

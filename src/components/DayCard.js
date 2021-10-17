@@ -45,7 +45,7 @@ export default function DayCard(props) {
                         <div style={{ marginTop: "10px", fontSize: "50px" }}>{props.ctemp}°</div>
                     </div>
                     <div style={{ marginLeft: "20px" }}>
-                        <div style={{ position: "relative", top: "-10px" }}><span style={{ fontSize: "30px", fontWeight: "500" }}>Day</span><br /><span style={{ fontSize: "25px", lineHeight: "15px" }}>{props.weather}</span></div>
+                        <div style={{ position: "relative", top: "-10px" }}><span className="ititle">Day</span><br /><span style={{ fontSize: "25px", lineHeight: "15px" }}>{props.weather}</span></div>
                         <div style={{ position: "relative", top: "17px", fontWeight: "400", fontSize: "18px" }}><span>{props.weather}. High {props.maxtemp}°C</span><br /><span>Wind {props.winddir} at {props.maxwind - 5} to {props.maxwind} kph</span></div>
                     </div>
                 </div>

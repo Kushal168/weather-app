@@ -78,3 +78,8 @@
 .compassP8{
     transform: translate(-42px, -50px);
 }
+
+.ititle{
+    font-size: 30px;
+    font-weight: 500;
+}

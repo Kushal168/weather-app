@@ -3011,8 +3011,15 @@ export default function Weather() {
                             mrise={forcast_data[0].astro.moonrise}
                             mset={forcast_data[0].astro.moonset} />
                     </div>
+                    {/* avghigh, avglow, recordhigh, recordlow, avgrain, avgsnow */}
                     <div className="cards">
-                        <AverageCard />
+                        <AverageCard
+                            avghigh={forcast_data[0].day.avgtemp_c}
+                            avglow={forcast_data[0].day.avgtemp_c - 8}
+                            wmph={forcast_data[0].day.maxwind_mph}
+                            wkph={forcast_data[0].day.maxwind_kph}
+                            avghum={forcast_data[0].day.avghumidity}
+                            avgvis={forcast_data[0].day.avgvis_km} />
                     </div>
                 </div>
             </div>
