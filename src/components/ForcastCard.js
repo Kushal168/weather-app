@@ -10,7 +10,7 @@ export default function ForcastCard(props) {
             <div>
                 <p><span>{dayArray[date.getDay()]} </span><span>{monthArray[date.getMonth()]} </span><span>{date.getDate()}</span></p>
                 <div><img src={props.icon} alt="sunny" height="60px" width="60px" /></div>
-                <div><span>{props.maxT}°C</span> / <span>{props.minT}°C</span></div>
+                <div><span>{props.maxT.toFixed(1)}°C</span> / <span>{props.minT.toFixed(1)}°C</span></div>
             </div>
         </div>
     )

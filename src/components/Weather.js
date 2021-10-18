@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AverageCard from './AverageCard';
 import DayCard from './DayCard';
 import ForcastCard from './ForcastCard';
@@ -2967,12 +2967,29 @@ export default function Weather() {
     const [current_data, setcurrent_data] = useState(current_tdata);
     const [forcast_data, setforcast_data] = useState(forcast_tdata);
 
+    let url = "http://api.weatherapi.com/v1/forecast.json?key=%20084827f43c25465d88c155923211310&days=3&q=sirsa";
+
+    useEffect(() => {
+        const fetchData = async () => {
+            let data = await fetch(url);
+            let parsedData = await data.json();
+            setcurrent_data(parsedData.current);
+            setforcast_data(parsedData.forecast.forecastday);
+        }
+        fetchData().catch(console.error);
+        
+    }, []);
+    
+    
+
+
+
     return (
         <>
             <p style={{ fontWeight: "bold", fontSize: "40px", marginLeft: "43px" }}>Next 3 Days</p>
             <div className="row mx-2 my-2">
                 {forcast_data.map((val) =>
-                    <div className="col-sm-1 mx-4">
+                    <div className="col-sm-1 mx-4" key={forcast_data[0].date_epoch + Math.floor(Math.random() * 100)}>
                         <ForcastCard date={val.date} maxT={val.day.maxtemp_c} minT={val.day.mintemp_c} icon={val.day.condition.icon} />
                     </div>
                 )}

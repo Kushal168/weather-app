@@ -12,7 +12,7 @@ export default function AverageCard(props) {
                             <span>AVG HIGH</span><span style={{visibility: 'hidden'}}>.........................</span><span>AVG LOW</span>
                         </div>
                         <div style={{textAlign: 'center', fontSize: "25px", fontWeight: "400" }}>
-                            <span>{avghigh}°</span><span style={{visibility: 'hidden'}}>.................................</span><span>{avglow}°</span>
+                            <span>{avghigh.toFixed(1)}°</span><span style={{visibility: 'hidden'}}>.................................</span><span>{avglow.toFixed(1)}°</span>
                         </div>
                     </div>
                     <div style={{marginTop: '160px'}}>
@@ -20,7 +20,7 @@ export default function AverageCard(props) {
                             <span>MAX WIND (mph)</span><span style={{visibility: 'hidden'}}>..........</span><span>MAX WIND (kph)</span>
                         </div>
                         <div style={{textAlign: 'center', fontSize: "25px", fontWeight: "400" }}>
-                            <span>{wmph}</span><span style={{visibility: 'hidden'}}>...............................</span><span>{wkph}</span>
+                            <span>{wmph.toFixed(1)}</span><span style={{visibility: 'hidden'}}>...............................</span><span>{wkph.toFixed(1)}</span>
                         </div>
                     </div>
                     <div style={{marginTop: '150px', marginBottom: '20px'}}>

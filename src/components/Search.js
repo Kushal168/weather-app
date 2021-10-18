@@ -1,7 +1,6 @@
 import React from 'react'
 
-export default function Search() {
-    
+export default function Search(props) {
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -18,7 +17,7 @@ export default function Search() {
                     </form>
                 </div>
             </nav>
-            <div style={{height: "50px", backgroundColor: "red", display: "flex", alignItems:"center"}}><span className="mx-2">Location searched</span></div>
+            <div style={{height: "50px", backgroundColor: "red", display: "flex", alignItems:"center"}}><span className="mx-2">{props.loc}</span></div>
         </div>
     )
 }

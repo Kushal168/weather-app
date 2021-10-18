@@ -44,11 +44,11 @@ export default function DayCard(props) {
                 <div className="d-flex" style={{ position: "relative", top: "-50px", marginLeft: "10px" }}>
                     <div>
                         <img src={iconurl} alt="sun" height="60px" width="60px" />
-                        <div style={{ marginTop: "10px", fontSize: "50px" }}>{props.ctemp}°</div>
+                        <div style={{ marginTop: "10px", fontSize: "50px" }}>{props.ctemp.toFixed(1)}°</div>
                     </div>
                     <div style={{ marginLeft: "20px" }}>
                         <div style={{ position: "relative", top: "-10px" }}><span className="ititle">Night</span><br /><span style={{ fontSize: "25px", lineHeight: "15px" }}>{props.weather}</span></div>
-                        <div style={{ position: "relative", top: "17px", fontWeight: "400", fontSize: "18px" }}><span>{props.weather}. Low {props.mintemp}°C</span><br /><span>Wind {props.winddir} at {props.maxwind - 5} to {props.maxwind} kph</span></div>
+                        <div style={{ position: "relative", top: "17px", fontWeight: "400", fontSize: "18px" }}><span>{props.weather}. Low {props.mintemp.toFixed(1)}°C</span><br /><span>Wind {props.winddir} at {(props.maxwind - 5).toFixed(1)} to {props.maxwind.toFixed(1)} kph</span></div>
                     </div>
                 </div>
 
