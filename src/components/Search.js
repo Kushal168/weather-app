@@ -1,6 +1,10 @@
 import React from 'react'
 
 export default function Search(props) {
+    const newloc = () => {
+        let val = document.getElementById("search").innerHTML;
+        props.changeLoc(val);
+    }
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -11,10 +15,10 @@ export default function Search(props) {
                     </button>
                 </div>
                 <div className="collapse navbar-collapse mx-3" id="navbarSupportedContent">
-                    <form className="d-flex">
-                        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                        <button className="btn btn-outline-success" type="submit">Search</button>
-                    </form>
+                    <span className="d-flex">
+                        <input className="form-control me-2" id="search" type="search" placeholder="Search" aria-label="Search" />
+                        <button className="btn btn-outline-success" onClick={newloc}>Search</button>
+                    </span>
                 </div>
             </nav>
             <div style={{height: "50px", backgroundColor: "red", display: "flex", alignItems:"center"}}><span className="mx-2">{props.loc}</span></div>

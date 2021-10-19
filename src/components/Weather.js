@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import AverageCard from './AverageCard';
 import DayCard from './DayCard';
 import ForcastCard from './ForcastCard';
+import Loader from './Loader';
 import NightCard from './NightCard';
 import TodayCard from './TodayCard';
 
-export default function Weather() {
+export default function Weather(props) {
     var current_tdata = {
         "last_updated_epoch": 1634217300,
         "last_updated": "2021-10-14 14:15",
@@ -2967,78 +2968,100 @@ export default function Weather() {
     const [current_data, setcurrent_data] = useState(current_tdata);
     const [forcast_data, setforcast_data] = useState(forcast_tdata);
 
-    let url = "http://api.weatherapi.com/v1/forecast.json?key=%20084827f43c25465d88c155923211310&days=3&q=sirsa";
+    const [loading, setloading] = useState(false);
+
+
+    let url = "http://api.weatherapi.com/v1/forecast.json?key=%20084827f43c25465d88c155923211310&days=3&q=" + props.loc;
+
+    const mountedRef = useRef(true)
 
     useEffect(() => {
         const fetchData = async () => {
+            setloading(true);
             let data = await fetch(url);
             let parsedData = await data.json();
-            setcurrent_data(parsedData.current);
-            setforcast_data(parsedData.forecast.forecastday);
+            props.changeLoc(parsedData.location.name);
+
+            if ("error" in parsedData && parsedData.error.code === 1006) {
+                alert("NO SUCH LOCATION EXISTS");
+
+            }
+            else {
+                setcurrent_data(parsedData.current);
+                setforcast_data(parsedData.forecast.forecastday);
+            }
+            setloading(false);
         }
         fetchData().catch(console.error);
-        
+
+        return () => { mountedRef.current = false };
+
     }, []);
-    
-    
+
+
 
 
 
     return (
         <>
-            <p style={{ fontWeight: "bold", fontSize: "40px", marginLeft: "43px" }}>Next 3 Days</p>
-            <div className="row mx-2 my-2">
-                {forcast_data.map((val) =>
-                    <div className="col-sm-1 mx-4" key={forcast_data[0].date_epoch + Math.floor(Math.random() * 100)}>
-                        <ForcastCard date={val.date} maxT={val.day.maxtemp_c} minT={val.day.mintemp_c} icon={val.day.condition.icon} />
+            <div className="d-flex" style={{alignItems: 'center', justifyContent: 'center'}}>
+                <div>
+                    <p style={{ fontWeight: "bold", fontSize: "40px", marginLeft: "43px" }}>Next 3 Days</p>
+                    <div className="row mx-2 my-2">
+                        {forcast_data.map((val) =>
+                            <div className="col-sm-1 mx-4" key={forcast_data[0].date_epoch + Math.floor(Math.random() * 1000)}>
+                                <ForcastCard date={val.date} maxT={val.day.maxtemp_c} minT={val.day.mintemp_c} icon={val.day.condition.icon} />
+                            </div>
+                        )}
                     </div>
-                )}
-            </div>
-            <div className="my-5" style={{ marginLeft: "25px" }}>
-                <div className="d-flex">
-                    <div className="cards">
-                        <DayCard
-                            uv={current_data.is_day === 1 ? current_data.uv : forcast_data[0].hour[16].uv}
-                            precip={current_data.is_day === 1 ? current_data.precip_mm : forcast_data[0].hour[16].precip_mm}
-                            humidity={current_data.is_day === 1 ? current_data.humidity : forcast_data[0].hour[16].humidity}
-                            winddir={current_data.is_day === 1 ? current_data.wind_dir : forcast_data[0].hour[16].wind_dir}
-                            maxwind={forcast_data[0].day.maxwind_kph}
-                            icon={current_data.is_day === 1 ? current_data.condition.icon : forcast_data[0].hour[16].condition.icon}
-                            ctemp={current_data.is_day === 1 ? current_data.temp_c : forcast_data[0].hour[16].temp_c}
-                            weather={current_data.is_day === 1 ? current_data.condition.text : forcast_data[0].hour[16].condition.text}
-                            maxtemp={forcast_data[0].day.maxtemp_c} />
-                    </div>
-                    <div className="cards">
-                        <NightCard
-                            uv={current_data.is_day !== 1 ? current_data.uv : forcast_data[0].hour[3].uv}
-                            precip={current_data.is_day !== 1 ? current_data.precip_mm : forcast_data[0].hour[3].precip_mm}
-                            humidity={current_data.is_day !== 1 ? current_data.humidity : forcast_data[0].hour[3].humidity}
-                            winddir={current_data.is_day !== 1 ? current_data.wind_dir : forcast_data[0].hour[3].wind_dir}
-                            maxwind={forcast_data[0].day.maxwind_kph}
-                            icon={current_data.is_day !== 1 ? current_data.condition.icon : forcast_data[0].hour[3].condition.icon}
-                            ctemp={current_data.is_day !== 1 ? current_data.temp_c : forcast_data[0].hour[3].temp_c}
-                            weather={current_data.is_day !== 1 ? current_data.condition.text : forcast_data[0].hour[3].condition.text}
-                            mintemp={forcast_data[0].day.mintemp_c} />
-                    </div>
-                    <div className="cards">
-                        <TodayCard
-                            illu={forcast_data[0].astro.moon_illumination}
-                            srise={forcast_data[0].astro.sunrise}
-                            sset={forcast_data[0].astro.sunset}
-                            mrise={forcast_data[0].astro.moonrise}
-                            mset={forcast_data[0].astro.moonset} />
-                    </div>
-                    {/* avghigh, avglow, recordhigh, recordlow, avgrain, avgsnow */}
-                    <div className="cards">
-                        <AverageCard
-                            avghigh={forcast_data[0].day.avgtemp_c}
-                            avglow={forcast_data[0].day.avgtemp_c - 8}
-                            wmph={forcast_data[0].day.maxwind_mph}
-                            wkph={forcast_data[0].day.maxwind_kph}
-                            avghum={forcast_data[0].day.avghumidity}
-                            avgvis={forcast_data[0].day.avgvis_km} />
+                    <div className="my-5" style={{ marginLeft: "25px" }}>
+                        <div className="d-flex">
+                            <div className="cards">
+                                <DayCard
+                                    uv={current_data.is_day === 1 ? current_data.uv : forcast_data[0].hour[16].uv}
+                                    precip={current_data.is_day === 1 ? current_data.precip_mm : forcast_data[0].hour[16].precip_mm}
+                                    humidity={current_data.is_day === 1 ? current_data.humidity : forcast_data[0].hour[16].humidity}
+                                    winddir={current_data.is_day === 1 ? current_data.wind_dir : forcast_data[0].hour[16].wind_dir}
+                                    maxwind={forcast_data[0].day.maxwind_kph}
+                                    icon={current_data.is_day === 1 ? current_data.condition.icon : forcast_data[0].hour[16].condition.icon}
+                                    ctemp={current_data.is_day === 1 ? current_data.temp_c : forcast_data[0].hour[16].temp_c}
+                                    weather={current_data.is_day === 1 ? current_data.condition.text : forcast_data[0].hour[16].condition.text}
+                                    maxtemp={forcast_data[0].day.maxtemp_c} />
+                            </div>
+                            <div className="cards">
+                                <NightCard
+                                    uv={current_data.is_day !== 1 ? current_data.uv : forcast_data[0].hour[3].uv}
+                                    precip={current_data.is_day !== 1 ? current_data.precip_mm : forcast_data[0].hour[3].precip_mm}
+                                    humidity={current_data.is_day !== 1 ? current_data.humidity : forcast_data[0].hour[3].humidity}
+                                    winddir={current_data.is_day !== 1 ? current_data.wind_dir : forcast_data[0].hour[3].wind_dir}
+                                    maxwind={forcast_data[0].day.maxwind_kph}
+                                    icon={current_data.is_day !== 1 ? current_data.condition.icon : forcast_data[0].hour[3].condition.icon}
+                                    ctemp={current_data.is_day !== 1 ? current_data.temp_c : forcast_data[0].hour[3].temp_c}
+                                    weather={current_data.is_day !== 1 ? current_data.condition.text : forcast_data[0].hour[3].condition.text}
+                                    mintemp={forcast_data[0].day.mintemp_c} />
+                            </div>
+                            <div className="cards">
+                                <TodayCard
+                                    illu={forcast_data[0].astro.moon_illumination}
+                                    srise={forcast_data[0].astro.sunrise}
+                                    sset={forcast_data[0].astro.sunset}
+                                    mrise={forcast_data[0].astro.moonrise}
+                                    mset={forcast_data[0].astro.moonset} />
+                            </div>
+                            {/* avghigh, avglow, recordhigh, recordlow, avgrain, avgsnow */}
+                            <div className="cards">
+                                <AverageCard
+                                    avghigh={forcast_data[0].day.avgtemp_c}
+                                    avglow={forcast_data[0].day.avgtemp_c - 8}
+                                    wmph={forcast_data[0].day.maxwind_mph}
+                                    wkph={forcast_data[0].day.maxwind_kph}
+                                    avghum={forcast_data[0].day.avghumidity}
+                                    avgvis={forcast_data[0].day.avgvis_km} />
+                            </div>
+                        </div>
                     </div>
                 </div>
+                {loading === true && <Loader />}
             </div>
         </>
     )
