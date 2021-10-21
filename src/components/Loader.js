@@ -1,10 +1,17 @@
 import React from 'react';
-import load from './icons/loading-waiting.gif'
+import load from './icons/spinner.gif'
 
 export default function Loader() {
     return (
-        <div className="loader" style={{position: 'absolute'}}>
-            <img src={load} alt="Loader" height="100px" width="100px"/>
-        </div>
+        <div id="loader1" style={{position: "absolute"}}>
+                <div className="up">
+                    <div className="one"></div>
+                    <div className="two"></div>
+                </div>
+                <div className="down">
+                    <div className="three"></div>
+                    <div className="four"></div>
+                </div>
+            </div>
     )
 }

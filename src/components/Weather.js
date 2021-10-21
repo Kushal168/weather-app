@@ -2968,7 +2968,7 @@ export default function Weather(props) {
     const [current_data, setcurrent_data] = useState(current_tdata);
     const [forcast_data, setforcast_data] = useState(forcast_tdata);
 
-    const [loading, setloading] = useState(false);
+    const [loading, setloading] = useState(true);
 
 
     let url = "http://api.weatherapi.com/v1/forecast.json?key=%20084827f43c25465d88c155923211310&days=3&q=" + props.loc;
@@ -2980,7 +2980,7 @@ export default function Weather(props) {
             setloading(true);
             let data = await fetch(url);
             let parsedData = await data.json();
-            props.changeLoc(parsedData.location.name);
+            props.changeLoc(parsedData.location.name, parsedData.location.region ,parsedData.location.country);
 
             if ("error" in parsedData && parsedData.error.code === 1006) {
                 alert("NO SUCH LOCATION EXISTS");
@@ -2996,7 +2996,16 @@ export default function Weather(props) {
 
         return () => { mountedRef.current = false };
 
+
     }, []);
+
+
+    // useEffect(() => {
+    //     effect
+    //     return () => {
+    //         cleanup
+    //     }
+    // }, [input])
 
 
 
@@ -3062,6 +3071,8 @@ export default function Weather(props) {
                     </div>
                 </div>
                 {loading === true && <Loader />}
+                
+                
             </div>
         </>
     )

@@ -1,2 +1,9 @@
 @import url("./components/style/forecastCard.css");
 @import url("./components/style/icard.css");
+@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+@import url('./components/style/loader.css');
+
+
+.customf{
+    font-family: 'Courgette', cursive;
+}
