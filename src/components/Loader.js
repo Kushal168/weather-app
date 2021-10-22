@@ -1,5 +1,4 @@
 import React from 'react';
-import load from './icons/spinner.gif'
 
 export default function Loader() {
     return (

@@ -12,9 +12,9 @@ export default function Footer() {
                 </div>
 
                 <ul className="nav col-md-4 justify-content-end list-unstyled d-flex mx-3" >
-                    <li className="ms-3"><a className="text-muted" target="_blank" href="https://www.instagram.com/mr_singh2000/"><img src={insta} width="24" height="24" /></a></li>
-                    <li className="ms-3"><a className="text-muted" target="_blank" href="https://github.com/MrSingh2000"><img src={github} width="24" height="24" /></a></li>
-                    <li className="ms-3"><a className="text-muted" target="_blank" href="https://www.linkedin.com/in/anshuman-singh-856991201/"><img src={linkedin} width="24" height="24" /></a></li>
+                    <li className="ms-3"><a className="text-muted" rel="noreferrer" target="_blank" href="https://www.instagram.com/mr_singh2000/"><img src={insta} alt="insta" width="24" height="24" /></a></li>
+                    <li className="ms-3"><a className="text-muted" rel="noreferrer" target="_blank" href="https://github.com/MrSingh2000"><img src={github} alt="github" width="24" height="24" /></a></li>
+                    <li className="ms-3"><a className="text-muted" rel="noreferrer" target="_blank" href="https://www.linkedin.com/in/anshuman-singh-856991201/"><img src={linkedin} alt="linkedin" width="24" height="24" /></a></li>
                 </ul>
             </footer>
         </div>

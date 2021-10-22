@@ -2970,6 +2970,8 @@ export default function Weather(props) {
 
     const [loading, setloading] = useState(true);
 
+    let changeLoc = props.changeLoc;
+
 
     let url = "http://api.weatherapi.com/v1/forecast.json?key=%20084827f43c25465d88c155923211310&days=3&q=" + props.loc;
 
@@ -2980,7 +2982,7 @@ export default function Weather(props) {
             setloading(true);
             let data = await fetch(url);
             let parsedData = await data.json();
-            props.changeLoc(parsedData.location.name, parsedData.location.region ,parsedData.location.country);
+            changeLoc(parsedData.location.name, parsedData.location.region, parsedData.location.country);
 
             if ("error" in parsedData && parsedData.error.code === 1006) {
                 alert("NO SUCH LOCATION EXISTS");
@@ -2997,35 +2999,33 @@ export default function Weather(props) {
         return () => { mountedRef.current = false };
 
 
-    }, []);
+    }, [changeLoc, url]);
 
-
-    // useEffect(() => {
-    //     effect
-    //     return () => {
-    //         cleanup
-    //     }
-    // }, [input])
-
-
-
-
+    const forcast = () => {
+        return forcast_data.map((val) =>
+            <div className="col-sm-1 customMargin" key={forcast_data[0].date_epoch + Math.floor(Math.random() * 1000)}>
+                <ForcastCard date={val.date} maxT={val.day.maxtemp_c} minT={val.day.mintemp_c} icon={val.day.condition.icon} />
+            </div>
+        )
+    }
+    const forcast2 = () => {
+        return  forcast_data.map((val) =>
+        <li class="list-group-item" style={{width: 'fit-content', background: 'transparent', border: 'none', width: '100px'}} key={forcast_data[0].date_epoch + Math.floor(Math.random() * 1000)}>
+            <ForcastCard date={val.date} maxT={val.day.maxtemp_c} minT={val.day.mintemp_c} icon={val.day.condition.icon} />
+        </li>
+    )
+    }
 
     return (
         <>
-            <div className="d-flex" style={{alignItems: 'center', justifyContent: 'center'}}>
-                <div>
-                    <p style={{ fontWeight: "bold", fontSize: "40px", marginLeft: "43px" }}>Next 3 Days</p>
-                    <div className="row mx-2 my-2">
-                        {forcast_data.map((val) =>
-                            <div className="col-sm-1 mx-4" key={forcast_data[0].date_epoch + Math.floor(Math.random() * 1000)}>
-                                <ForcastCard date={val.date} maxT={val.day.maxtemp_c} minT={val.day.mintemp_c} icon={val.day.condition.icon} />
-                            </div>
-                        )}
-                    </div>
-                    <div className="my-5" style={{ marginLeft: "25px" }}>
-                        <div className="d-flex">
-                            <div className="cards">
+            <div className="d-flex responsive" style={{ alignItems: 'center', justifyContent: 'center' }}>
+                <div className="responsive1">
+                    <p className="nextdays">Next 3 Days</p>
+                    {window.screen.availWidth <= 425 ? (<ul class="list-group list-group-horizontal" style={{marginBottom: '-100px'}}>{forcast2()}</ul>) : (<div className="row mx-2 my-2">{forcast()}</div>)}
+                    
+                    <div className="customM">
+                        <div className="mobile">
+                            <div className="cards1">
                                 <DayCard
                                     uv={current_data.is_day === 1 ? current_data.uv : forcast_data[0].hour[16].uv}
                                     precip={current_data.is_day === 1 ? current_data.precip_mm : forcast_data[0].hour[16].precip_mm}
@@ -3037,7 +3037,7 @@ export default function Weather(props) {
                                     weather={current_data.is_day === 1 ? current_data.condition.text : forcast_data[0].hour[16].condition.text}
                                     maxtemp={forcast_data[0].day.maxtemp_c} />
                             </div>
-                            <div className="cards">
+                            <div className="cards mobile">
                                 <NightCard
                                     uv={current_data.is_day !== 1 ? current_data.uv : forcast_data[0].hour[3].uv}
                                     precip={current_data.is_day !== 1 ? current_data.precip_mm : forcast_data[0].hour[3].precip_mm}
@@ -3071,9 +3071,10 @@ export default function Weather(props) {
                     </div>
                 </div>
                 {loading === true && <Loader />}
-                
-                
+
+
             </div>
+
         </>
     )
 }

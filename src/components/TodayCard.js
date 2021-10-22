@@ -4,7 +4,7 @@ import sundial from './icons/sundial.png';
 export default function TodayCard(props) {
     return (
         <div>
-            <div className="icard">
+            <div className="icard display">
                 <div>
                     <div className="ititle" style={{marginLeft: '10px'}}>Sun</div>
                     <div className="sundial" style={{marginTop: '70px', marginBottom: '50px'}}>
@@ -12,7 +12,7 @@ export default function TodayCard(props) {
                             <img src={sundial} alt="Sundial" height="140px"/>
                             <br /><span className="progresstext">Sunrise<span style={{ visibility: "hidden" }}>.................................</span>Sunset</span>
                         </div>
-                        <span style={{ fontSize: "23px", fontWeight: '450' , marginLeft: '15px'}}>{props.srise}<span style={{ visibility: "hidden" }}>...........................</span>{props.sset}</span>
+                        <span style={{ fontSize: "18px", fontWeight: '450' , marginLeft: '15px'}}>{props.srise}<span style={{ visibility: "hidden" }}>...........................</span>{props.sset}</span>
                     </div>
                     <div className="ititle" style={{marginBottom: '40px', marginLeft: '10px'}}>
                         Moon
@@ -21,8 +21,8 @@ export default function TodayCard(props) {
                         Moon Illumination
                         <p>{props.illu}%</p>
                     </div>
-                    <div style={{marginTop: '40px'}}>
-                        <span className="progresstext" style={{marginLeft: '15px'}}>MOON RISE <span style={{ visibility: "hidden" }}>...................</span> MOON SET</span>
+                    <div style={{marginTop: '20px'}}>
+                        <span className="progresstext" style={{marginLeft: '25px'}}>MOON RISE <span style={{position: 'relative', right: '-130px'}}>MOON SET</span> </span>
                         <div>
                             <span style={{ fontSize: "23px", fontWeight: '450' , marginLeft: '10px'}}>{props.mrise}<span style={{ visibility: "hidden" }}>.......................</span> {props.mset}</span>
                         </div>

@@ -4,7 +4,7 @@ export default function AverageCard(props) {
     const {avghigh, avglow, wmph, wkph, avghum, avgvis} = props;
     return (
         <div>
-            <div className="icard">
+            <div className="icard display">
                 <div>
                     <div className="ititle" style={{ textAlign: "center" }}>Almanac</div>
                     <div style={{marginTop: '50px'}}>

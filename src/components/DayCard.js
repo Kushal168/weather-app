@@ -39,19 +39,19 @@ export default function DayCard(props) {
         <div className="icard">
             <div>
                 {/* TEMP DIV */}
-                <div className="d-flex" style={{ position: "relative", top: "-50px", marginLeft: "10px" }}>
+                <div className="d-flex imain">
                     <div>
                         <img src={iconurl} alt="sun" height="60px" width="60px" />
-                        <div style={{ marginTop: "10px", fontSize: "50px" }}>{props.ctemp.toFixed()}°</div>
+                        <div className="mainTemp">{props.ctemp.toFixed()}°</div>
                     </div>
-                    <div style={{ marginLeft: "20px" }}>
-                        <div style={{ position: "relative", top: "-10px" }}><span className="ititle">Day</span><br /><span style={{ fontSize: "25px", lineHeight: "15px" , opacity: 0.5}}>{props.weather}</span></div>
-                        <div style={{ position: "relative", top: "17px", fontWeight: "400", fontSize: "18px" }}><span>{props.weather}. High {props.maxtemp.toFixed(1)}°C</span><br /><span>Wind {props.winddir} at {(props.maxwind - 5).toFixed(1)} to {props.maxwind.toFixed(1)} kph</span></div>
+                    <div>
+                        <div className="topmost"><span className="ititle">Day</span><br /><span className="dimmed">{props.weather}</span></div>
+                        <div className="upperInfo"><span>{props.weather}. High {props.maxtemp.toFixed(1)}°C</span><br /><span>Wind {props.winddir} at {(props.maxwind - 5).toFixed(1)} to {props.maxwind.toFixed(1)} kph</span></div>
                     </div>
                 </div>
 
                 {/* CIRCULAR RINGS DIV */}
-                <div style={{ position: "relative", top: "55px" }}>
+                <div className="ringpos">
                     <div className="d-flex" style={{ marginBottom: "22px" }}>
                         <div className="container">
                             <div className="progresstext">HUMIDITY</div>
@@ -84,7 +84,7 @@ export default function DayCard(props) {
                                 </CircularProgressbarWithChildren>;
                             </div>
                         </div>
-                        <div>
+                        <div style={{position: 'relative', top:'-8px'}}>
                             <div className="progresstext1 d-flex" style={{ fontSize: "15px", fontWeight: "500", marginTop: "7px" }}>
                                 <span className="n" style={{ position: "relative", left: "18px" }}><span style={{ fontSize: "15px" }}>(Wind)</span> N</span><span className="e" style={{ position: "relative", top: "80px", left: "83px" }}>E</span><span className="w" style={{ position: "relative", top: "80px", right: "90px" }}>W</span><span className="s" style={{ position: "relative", top: "160px", left: "-20px" }}>S</span>
                             </div>
