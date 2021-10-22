@@ -2973,7 +2973,7 @@ export default function Weather(props) {
     let changeLoc = props.changeLoc;
 
 
-    let url = "http://api.weatherapi.com/v1/forecast.json?key=%20084827f43c25465d88c155923211310&days=3&q=" + props.loc;
+    let url = "http://api.weatherapi.com/v1/forecast.json?key=084827f43c25465d88c155923211310&days=3&q=" + props.loc;
 
     const mountedRef = useRef(true)
 
