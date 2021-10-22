@@ -4,13 +4,12 @@ Data is fetched from weather-api via JS fetch API.
 
 Things this application can do ===>
 
-=> Search for any city/town
-=> Get Day/Night weather cards
-=> Get Sun and Moon information corresponding to the date
-=> Get Average data Card
-=> Forcast weather for a maximum of 3 days
-=> Responsive Design
+1) Search for any city/town
+2) Get Day/Night weather cards
+3) Get Sun and Moon information corresponding to the date
+4) Get Average data Card
+5) Forcast weather for a maximum of 3 days
+6) Responsive Design
 
 
 Credits => Anshuman Singh
-
